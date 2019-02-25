@@ -5,7 +5,7 @@ WORKDIR /usr/src/code
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install && npm install yaeti
 
 COPY . .
 
