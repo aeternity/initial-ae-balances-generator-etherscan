@@ -5,7 +5,7 @@ WORKDIR /usr/src/code
 
 COPY package*.json ./
 
-RUN npm config set engine-strict true && npm install
+RUN npm config set engine-strict true && npm install -g npm@6.8.0 && npm install
 
 COPY . .
 
