@@ -16,9 +16,34 @@ $ head accounts.json
 $
 ```
 
-# Usage
+# a) Usage with Node.js
+
+requires node.js, git and etherscan.io api key
+
+- https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+- https://nodejs.org/en/download/
+- https://etherscan.io/register
 
 `node initial-balances-generator-etherscan.js -k XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+
+where: `-k [Etherscan.io api key]`
+
+
+# b) Usage with Docker
+
+requires docker-ce, git and etherscan.io api key
+
+- https://docs.docker.com/install/
+- https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+```
+git clone https://github.com/aeternity/initial-ae-balances-generator-etherscan.git
+cd initial-ae-balances-generator-etherscan
+docker build -t aeternity/token-burn-listener-etherscan .
+touch accounts.json
+docker run --rm -it -v $(pwd)/accounts.json:/usr/src/code/accounts.json aeternity/token-burn-listener-etherscan -k XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+shasum -a 256 accounts.json
+```
 
 where: `-k [Etherscan.io api key]`
 
