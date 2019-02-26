@@ -102,6 +102,7 @@ var end = start + pageSize;
 	jsonString = jsonString.replace(/",$/gm, ',')
 	jsonString = jsonString.replace(/"$/gm, '')
 	fs.writeFileSync("./accounts.json", jsonString+'\n') ;
+	fs.writeFileSync("./collected_logs.json", JSON.stringify(collected)+'\n') ;
 
   let final = Object
     .values(json)
@@ -113,6 +114,7 @@ var end = start + pageSize;
 	console.log(`Processed ${collected.length} events with ${Object.keys(json).length} individual aeternity accounts`)
 	console.log(`Collected ${final} AE Tokens in this phase`)
 	console.log('\n./accounts.json written to disk')
+	console.log('\n./collected_logs.json written to disk')
 	console.log('verify sha256 hash of accounts json with this command:')
 	console.log('\t$ shasum -a 256 accounts.json')
 })()
