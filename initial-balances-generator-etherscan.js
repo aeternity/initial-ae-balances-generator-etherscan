@@ -78,6 +78,7 @@ var end = start + pageSize;
 		let resp = await axios.get(url)
 		console.assert(resp.data.status === "0" || resp.data.status === "1", "Bad status in response: %s (%s). Url: %s", resp.data.status, resp.data.message, url) // 0 = No records found, 1 = OK.
 		let results = resp.data.result
+		console.assert(results.length < 1000, "Potentially truncated results (%d). Url %s", results.length, url) // From https://etherscan.io/apis#logs : "For performance & security considerations, only the first 1000 results are return. So please narrow down the filter parameters"
 		results = results
 			.map(r => web3.eth.abi.decodeLog(
 				abi,
