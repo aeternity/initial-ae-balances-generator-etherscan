@@ -5,11 +5,17 @@ const axios = require('axios')
 const fs = require('fs')
 const args = require('minimist')(process.argv.slice(2));
 
+// Phase 0
+//const url1 = 'https://etherscan.io/tx/0xb9aa18432655e78cda82320d419f4a0ef67863855a314fb766eb2ddbdda96dc9';
+//const url2 = 'https://etherscan.io/tx/0x6dd35f57ac61436c9ee7ebc2cd0be830506965aca072eb23dc0e4e4b6456cbfb';
+//const fromBlock = 6682073;
+//const toBlock   = 6772802
+
+// Phase 1
 const url1 = 'https://etherscan.io/tx/0x6dd35f57ac61436c9ee7ebc2cd0be830506965aca072eb23dc0e4e4b6456cbfb';
 const url2 = 'https://etherscan.io/tx/0xed2415a9e8026e042c58e701bfbe218f858ad71bfa9796c9b8936b8faae83155';
-
-const fromBlock = 6772802;
-const toBlock   = 7225342 
+const fromBlock = 6772803; // included
+const toBlock   = 7225342 // included
 
 const apiKey = args.k;
 
@@ -59,17 +65,19 @@ const abi = [
 ]
 
 var start = fromBlock;
-var pageSize = Math.floor((toBlock - fromBlock) / 4);
+var pageSize = 10000; // reduce if results truncated by etherscan
 
-var end = start + pageSize;
+var end = start + (pageSize - 1);
 (async function() {
 	let collected = []
-	while(end <= toBlock) {
-		console.log(`Getting Logs from block ${start} to ${end}. Please wait...`)
+	while(start <= toBlock) {
+		var end_in_range = Math.min(end, toBlock)
+		console.log(`Getting Logs from block ${start} to ${end_in_range}. Please wait...`)
+		// HTTP API includes fromBlock and includes toBlock.
 		let url = `https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=${
 			start
 		}&toBlock=${
-			end
+			end_in_range
 		}&address=${
 			address
 		}&topic0=&apikey=${
@@ -86,8 +94,8 @@ var end = start + pageSize;
 				[r.topics[1], r.topics[2]]
 			))
 		collected = collected.concat(results)
-		start = end
-		end = start + pageSize
+		start = 1 + end
+		end = start + (pageSize - 1)
 	}
 	let json = {}
 	collected.forEach(e => {
