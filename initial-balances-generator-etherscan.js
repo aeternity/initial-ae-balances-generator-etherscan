@@ -76,6 +76,7 @@ var end = start + pageSize;
 			apiKey
 		}`
 		let resp = await axios.get(url)
+		console.assert(resp.data.status === "0" || resp.data.status === "1", "Bad status in response: %s (%s). Url: %s", resp.data.status, resp.data.message, url) // 0 = No records found, 1 = OK.
 		let results = resp.data.result
 		results = results
 			.map(r => web3.eth.abi.decodeLog(
