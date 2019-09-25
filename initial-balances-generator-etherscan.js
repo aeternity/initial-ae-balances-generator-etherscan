@@ -18,15 +18,15 @@ const args = require('minimist')(process.argv.slice(2));
 //const toBlock   = 7225342 // included
 
 // Phase 2
-const url1 = 'https://etherscan.io/tx/0xed2415a9e8026e042c58e701bfbe218f858ad71bfa9796c9b8936b8faae83155';
-const url2 = 'https://etherscan.io/tx/0xadb242fca69bf2679bf0860437d53562cdbec87ce0a17c771f69e80aa308ef8f';
-const fromBlock = 7225343; // included
-const toBlock   = 7761026; // included
+//const url1 = 'https://etherscan.io/tx/0xed2415a9e8026e042c58e701bfbe218f858ad71bfa9796c9b8936b8faae83155';
+//const url2 = 'https://etherscan.io/tx/0xadb242fca69bf2679bf0860437d53562cdbec87ce0a17c771f69e80aa308ef8f';
+//const fromBlock = 7225343; // included
+//const toBlock   = 7761026; // included
 
 // Phase 3
 const url1 = 'https://etherscan.io/tx/0xadb242fca69bf2679bf0860437d53562cdbec87ce0a17c771f69e80aa308ef8f';
 const url2 = 'https://etherscan.io/tx/0xa3a9ec03f7521010b6e544813a25d2539dbdaac69a2bfa56bcc1ae91be570d12';
-const fromBlock = 7761026; // included
+const fromBlock = 7761027; // included
 const toBlock   = 8515749; // included
 
 const apiKey = args.k;
